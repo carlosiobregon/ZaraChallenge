@@ -58,15 +58,11 @@ final class CharacterListView: UIView {
     
     private func setUpView() {
         applyViewCode()
-        setUpViewModel()
-        setUpCollectionView()
+        connectViewModelToView()
     }
     
-    private func setUpViewModel() {
+    private func connectViewModelToView() {
         viewModel?.delegate = self
-    }
-    
-    private func setUpCollectionView() {
         collectionView.dataSource = viewModel
         collectionView.delegate = viewModel
     }
@@ -83,7 +79,7 @@ final class CharacterListView: UIView {
 }
 
 extension CharacterListView: ViewCodeConfiguration {
-    // MARK: - Configuration
+    // MARK: - ViewCode
     func buildHierarchy() {
         addSubviews(collectionView, spinner)
     }
@@ -106,9 +102,7 @@ extension CharacterListView: ViewCodeConfiguration {
     func configureViews() {
         spinner.startAnimating()
     }
-    
-    
-    
+
 }
 
 extension CharacterListView: CharacterListViewModelDelegate {

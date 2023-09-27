@@ -11,11 +11,12 @@ import UIKit
 /// Controller to show and search for Characters
 final class CharacterViewController: UIViewController {
     
+    weak var coordinator: MainCoordinator?
     private var characterListView: CharacterListView?
     
-    convenience init(listView: CharacterListView?) {
+    convenience init(viewModel: CharacterListViewModel) {
         self.init()
-        characterListView = listView
+        characterListView = CharacterListView(with: viewModel)
     }
     
     override func loadView() {
@@ -26,12 +27,16 @@ final class CharacterViewController: UIViewController {
         super.viewDidLoad()
         defaultViewSettings()
         addSearchButton()
+        characterListView?.delegate = self
     }
     
     func defaultViewSettings() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .black
         title = "Characters"
+        
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
     }
 
     private func addSearchButton() {
@@ -48,7 +53,7 @@ final class CharacterViewController: UIViewController {
 extension CharacterViewController: CharacterListViewDelegate {
     // MARK: - CharacterListViewDelegate
     func characterListView(_ characterListView: CharacterListView, didSelectCharacter character: Character) {
-        // Open detail controller for that character
+        coordinator?.showCharacterDetail(character: character)
     }
 }
 

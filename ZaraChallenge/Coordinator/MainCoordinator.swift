@@ -19,11 +19,16 @@ class MainCoordinator: Coordinator {
         navigationController.navigationBar.prefersLargeTitles = true
         
         let listViewModel = CharacterListViewModel()
-        let listView = CharacterListView(with: listViewModel)
-        let characterListVC = CharacterViewController(listView: listView)
-        listViewModel.delegate = listView
-        listView.delegate = characterListVC
+        let characterListVC = CharacterViewController(viewModel: listViewModel)
+        characterListVC.coordinator = self
         
         navigationController.pushViewController(characterListVC, animated: true)
+    }
+    
+    func showCharacterDetail(character: Character) {
+        let viewModel = CharacterDetailViewModel(character: character)
+        let detailVC = CharacterDetailViewController(viewModel: viewModel)
+        detailVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController.pushViewController(detailVC, animated: true)
     }
 }

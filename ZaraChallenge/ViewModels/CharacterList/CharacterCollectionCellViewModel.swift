@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CharacterCollectionViewCellViewModel: Hashable, Equatable {
+final class CharacterCollectionCellViewModel: Hashable, Equatable {
     public let characterName: String
     private let characterStatus: CharacterStatus
     private let characterImageUrl: URL?
@@ -37,7 +37,7 @@ final class CharacterCollectionViewCellViewModel: Hashable, Equatable {
     }
 
     // MARK: - Hashable
-    static func == (lhs: CharacterCollectionViewCellViewModel, rhs: CharacterCollectionViewCellViewModel) -> Bool {
+    static func == (lhs: CharacterCollectionCellViewModel, rhs: CharacterCollectionCellViewModel) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
 

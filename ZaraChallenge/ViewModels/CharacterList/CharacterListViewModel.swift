@@ -22,7 +22,7 @@ final class CharacterListViewModel: NSObject {
     var characters: [Character] = [] {
         didSet {
             for character in characters {
-                let viewModel = CharacterCollectionViewCellViewModel(
+                let viewModel = CharacterCollectionCellViewModel(
                     characterName: character.name,
                     characterStatus: character.status,
                     characterImageUrl: URL(string: character.image)
@@ -34,7 +34,7 @@ final class CharacterListViewModel: NSObject {
         }
     }
     
-    private var cellViewModels: [CharacterCollectionViewCellViewModel] = []
+    private var cellViewModels: [CharacterCollectionCellViewModel] = []
     private var apiInfo: GetAllCharactersResponse.Info? = nil
     private var isLoadingMoreCharacters = false
     
